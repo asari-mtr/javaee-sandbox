@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        >
+   <f:view>
+       <h:form>
+           <h:outputLabel for="title" value="タイトル"/>
+           <h:inputText id="title" value="#{messageController.newMessage.title}"/>
+           <h:outputLabel for="context" value="内容"/>
+           <h:inputText id="context" value="#{messageController.newMessage.context}"/>
+           <h:outputLabel for="author" value="名前"/>
+           <h:inputText id="author" value="#{messageController.newMessage.author}"/>
+           <h:commandButton value="登録" action="#{messageController.register()}"/>
+       </h:form>
+       <h:form>
+           <h:commandButton value="追加" action="#{messageController.addTag()}"/>
+       </h:form>
+       <c:set value="hoge" target="#{messageController}" property="keyword"/>
+       <c:set value="#{13}" target="#{profile}" property="age"/>
+       <h:outputText value="#{messageController.result()}"/>
+       <h:form>
+           <h:selectManyListbox id="tags" value="#{messageController.tags}" converter="tagConverter">
+               <f:selectItems  value="#{messageController.findTag()}" var="tag" itemLabel="#{tag.name}" itemValue="#{tag}"/>
+           </h:selectManyListbox>
+           <h:message for="tags"/>
+           <h:commandButton value="更新" action="#{messageController.refresh()}"/>
+       </h:form>
+       <h:form>
+       <h:commandLink action="#{messageController.next}" value="next!!"/>
+       </h:form>
+       <ui:repeat value="#{messageController.findAll()}" var="message">
+           <div>
+               <ul>
+                   <li>
+                       <h:outputLabel value="#{message.title}"/>
+                   </li>
+               </ul>
+           </div>
+       </ui:repeat>
+       <ui:debug/>
+   </f:view>
+</html>
