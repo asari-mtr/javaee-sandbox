@@ -67,7 +67,8 @@ public class MessageController {
     }
 
     public List<Message> findAll() {
-        return messageRepository.findAll().stream().filter( message -> message.getTitle().contains(keyword)).collect(Collectors.toList());
+//        return messageRepository.findAll().stream().filter( message -> message.getTitle().contains(keyword)).collect(Collectors.toList());
+        return messageRepository.findAll();
     }
     public List<Tag> findTag() {
         return tagRepository.findAll();
