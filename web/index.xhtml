@@ -7,7 +7,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
         >
-   <f:view>
+<h:head></h:head>
+<h:body>
        <h:form>
            <h:outputLabel for="title" value="タイトル"/>
            <h:inputText id="title" value="#{messageController.newMessage.title}"/>
@@ -18,11 +19,11 @@
            <h:commandButton value="登録" action="#{messageController.register()}"/>
        </h:form>
        <h:form>
-           <h:commandButton value="追加" action="#{messageController.addTag()}"/>
-       </h:form>
-       <c:set value="#{13}" target="#{profile}" property="age"/>
-       <h:outputText value="#{messageController.result()}"/>
-       <h:form>
+           <h:commandButton value="追加" action="#{messageController.addTag()}">
+               <f:ajax execute="@this" render="tags"/>
+           </h:commandButton>
+           <c:set value="#{13}" target="#{profile}" property="age"/>
+           <h:outputText value="#{messageController.result()}"/>
            <h:selectManyListbox id="tags" value="#{messageController.tags}" converter="tagConverter">
                <f:selectItems  value="#{messageController.findTag()}" var="tag" itemLabel="#{tag.name}" itemValue="#{tag}"/>
            </h:selectManyListbox>
@@ -42,5 +43,5 @@
            </div>
        </ui:repeat>
        <ui:debug hotkey="k"/>
-   </f:view>
+   </h:body>
 </html>
