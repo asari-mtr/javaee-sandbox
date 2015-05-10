@@ -1,3 +1,5 @@
+import entity.AbstractEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -8,11 +10,7 @@ import java.util.Date;
  * Created by asari on 2015/04/14.
  */
 @Entity
-public class Message {
-    @Id
-    @Column
-    @GeneratedValue
-    private int id;
+public class Message extends AbstractEntity {
     @Column
     private String title;
     @Column
@@ -21,14 +19,6 @@ public class Message {
     private String author;
     @Column
     private Date updateDate;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
