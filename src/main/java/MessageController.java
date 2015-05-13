@@ -45,7 +45,29 @@ public class MessageController {
     }
 
     public String say() {
-        return "hello world,,,,";
+        if (country == null){
+            return "hello world,,,,";
+        }
+        if ("japan". equals(country)){
+            return "こんにちは";
+        }
+        if ("usa". equals(country)){
+            return "Hello";
+        }
+        if ("china". equals(country)){
+            return "你好";
+        }
+        throw new IllegalArgumentException();
+    }
+
+    private String country;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Message getNewMessage() {

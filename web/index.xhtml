@@ -30,6 +30,17 @@
            <h:message for="tags"/>
            <h:commandButton value="更新" action="#{messageController.refresh()}"/>
        </h:form>
+    <h:form>
+        <h:selectOneMenu value="#{messageController.country}">
+            <f:selectItem itemValue="japan" itemLabel="日本"/>
+            <f:selectItem itemValue="usa" itemLabel="アメリカ"/>
+            <f:selectItem itemValue="china" itemLabel="中国"/>
+            <f:ajax event="valueChange" execute="@this" render="greeting"/>
+        </h:selectOneMenu>
+    </h:form>
+    
+    <h:outputText id="greeting" value="#{messageController.say()}"></h:outputText>
+
        <h:form>
        <h:commandLink action="#{messageController.next}" value="next!!"/>
        </h:form>
