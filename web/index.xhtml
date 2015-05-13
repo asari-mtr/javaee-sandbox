@@ -38,8 +38,8 @@
             <f:ajax event="valueChange" execute="@this" render="greeting"/>
         </h:selectOneMenu>
     </h:form>
-    
     <h:outputText id="greeting" value="#{messageController.say()}"></h:outputText>
+    <ui:include src="select-staff.xhtml"/>
 
        <h:form>
        <h:commandLink action="#{messageController.next}" value="next!!"/>

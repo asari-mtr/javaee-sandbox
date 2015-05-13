@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core">
+    <h:form>
+        <div>
+            <h:selectOneMenu id="unit" value="#{selectStaffAction.selectUnit}">
+                <f:selectItems value="#{selectStaffAction.unitList}" var="item" itemValue="#{item}" itemLabel="#{item}">
+                </f:selectItems>
+                <f:ajax event="change" execute="@this" render="@form"/>
+            </h:selectOneMenu>
+        </div>
+        <div>
+            <h:selectManyListbox id="left" value="#{selectStaffAction.leftList}" collectionType="java.util.ArrayList" converter="staffConverter">
+                <f:selectItems value="#{selectStaffAction.leftList}" var="staff" itemValue="#{staff}"
+                               itemLabel="#{staff.name}"/>
+            </h:selectManyListbox>
+            <br/>
+            <h:commandButton action="#{selectStaffAction.addStaff}" value="追加">
+                <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+            <h:commandButton action="#{selectStaffAction.removeStaff}" value="削除">
+                <f:ajax execute="@form" render="@form"/>
+            </h:commandButton>
+            <br/>
+            <h:selectManyListbox id="right" value="#{selectStaffAction.rightList}" collectionType="java.util.ArrayList" converter="staffConverter">
+                <f:selectItems value="#{selectStaffAction.rightList}"  var="staff" itemValue="#{staff}"
+                               itemLabel="#{staff.name}"/>
+            </h:selectManyListbox>
+        </div>
+    </h:form>
+</ui:composition>
