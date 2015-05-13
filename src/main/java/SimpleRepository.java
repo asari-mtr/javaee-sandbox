@@ -17,7 +17,7 @@ public class SimpleRepository<E extends AbstractEntity> {
     private EntityManager entityManager;
 
     public SimpleRepository() {
-        Type type = this.getClass().getGenericSuperclass();
+        Type type = this.getClass().getSuperclass().getGenericSuperclass();
         clazz = (Class<E>) ((ParameterizedType) type).getActualTypeArguments()[0];
     }
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var map = {"counter" : 0}
+            $("#clickme").click(function() {
+                function extracted() {
+                    for (var i = 0; i < 10; i++) {
+                        map.counter = map.counter + 1;
+                        $("#counter").text(map.counter);
+                        $.ajax({
+                            url: "rest/helloworld",
+                            success: function (text) {
+                                $("#content").append(text + "<br/>");
+                                map.counter = map.counter - 1;
+                                $("#counter").text(map.counter);
+                                if (map.counter == 0) {
+                                    $("#content").append("<hr/>");
+                                    extracted();
+                                }
+                            }
+                        });
+                    }
+                }
+                extracted();
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="clickme">clikc me!!</div>
+<div id="counter">0</div>
+<div id="content"></div>
+</body>
+</html>
