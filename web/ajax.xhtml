@@ -52,12 +52,14 @@
         <ui:param name="id" value="4"/>
         <ui:param name="action" value="#{timer}"/>
     </ui:include>
+    <br/>
     <c:if test="#{true}">
         <ui:include src="_ajax1.xhtml">
             <ui:param name="id" value="5"/>
             <ui:param name="action" value="#{timer}"/>
         </ui:include>
     </c:if>
+    <br/>
     <!-- 更新されない -->
     <c:if test="#{param['dummy'] == 'dummy'}">
         <ui:include src="_ajax1.xhtml">
@@ -65,6 +67,7 @@
             <ui:param name="action" value="#{timer}"/>
         </ui:include>
     </c:if>
+    <br/>
     <c:if test="#{timer.now() != null}">
         <ui:include src="_ajax1.xhtml">
             <ui:param name="id" value="7"/>
