@@ -7,9 +7,11 @@
     <persistence-unit name="primary">
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
         <class>Message</class>
+        <class>entity.Book</class>
+        <class>entity.Comic</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.show_sql" value="show" />
         </properties>
     </persistence-unit>
 </persistence>

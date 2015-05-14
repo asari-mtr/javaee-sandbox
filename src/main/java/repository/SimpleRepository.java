@@ -1,3 +1,5 @@
+package repository;
+
 import entity.AbstractEntity;
 
 import javax.persistence.EntityManager;
@@ -11,14 +13,25 @@ import java.util.List;
 /**
  * Created by asari on 2015/05/09.
  */
-public class SimpleRepository<E extends AbstractEntity> {
-    private final Class<E> clazz;
+public class SimpleRepository<E extends AbstractEntity> extends AbstractRepository<E> {
+    private Class<E> clazz;
     @PersistenceContext(name = "NewPersistenceUnit")
     private EntityManager entityManager;
 
     public SimpleRepository() {
-        Type type = this.getClass().getSuperclass().getGenericSuperclass();
-        clazz = (Class<E>) ((ParameterizedType) type).getActualTypeArguments()[0];
+        // TODO きれいにしたい
+        System.out.println(this.getClass().getName());
+        System.out.println(this.getClass().getGenericSuperclass().getTypeName());
+        System.out.println(this.getClass().getSuperclass().getName());
+        System.out.println(this.getClass().getSuperclass().getGenericSuperclass().getTypeName());
+        if(this.getClass().getGenericSuperclass().getTypeName().contains("SmartRepository")){
+            Type type = this.getClass().getGenericSuperclass();
+            clazz = (Class<E>) ((ParameterizedType) type).getActualTypeArguments()[0];
+        }else {
+            Type type = this.getClass().getSuperclass().getGenericSuperclass();
+            clazz = (Class<E>) ((ParameterizedType) type).getActualTypeArguments()[0];
+
+        }
     }
 
     @Transactional
