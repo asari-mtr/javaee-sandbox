@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        >
+<h:head>
+    <f:metadata>
+        <f:viewParam name="type" value="#{bookAction.type}"/>
+    </f:metadata>
+</h:head>
+<h:body>
+    <ui:debug hotkey="k"/>
+    <h:form>
+        <h:commandButton value="click me 1!">
+            <f:ajax render="label1"/>
+        </h:commandButton>
+        <h:commandButton value="click me 2!">
+            <f:ajax render="label2"/>
+        </h:commandButton>
+        <h:commandButton value="click me 3!">
+            <f:ajax render="label3"/>
+        </h:commandButton>
+        <h:commandButton value="click me 4!">
+            <f:ajax render="label4"/>
+        </h:commandButton>
+        <h:commandButton value="click me 5!">
+            <f:ajax render="label5"/>
+        </h:commandButton>
+        <h:commandButton value="click me 6!">
+            <f:ajax render="label6"/>
+        </h:commandButton>
+        <h:commandButton value="click me 7!">
+            <f:ajax render="label7"/>
+        </h:commandButton>
+    </h:form>
+    <br/>
+    <h:outputLabel for="label1" value="label1:"/>
+    <h:outputText id="label1" value="#{timer.now()}"/>
+    <br/>
+    <!-- 更新されない -->
+    <label for="label2">label2:</label>
+    <span id="label2">#{timer.now()}</span>
+    <br/>
+    <h:outputLabel for="label3" value="label3:"/>
+    <h:outputText id="label3" value="#{timer.now()}"/>
+    <br/>
+    <ui:include src="_ajax1.xhtml">
+        <ui:param name="id" value="4"/>
+        <ui:param name="action" value="#{timer}"/>
+    </ui:include>
+    <c:if test="#{true}">
+        <ui:include src="_ajax1.xhtml">
+            <ui:param name="id" value="5"/>
+            <ui:param name="action" value="#{timer}"/>
+        </ui:include>
+    </c:if>
+    <!-- 更新されない -->
+    <c:if test="#{param['dummy'] == 'dummy'}">
+        <ui:include src="_ajax1.xhtml">
+            <ui:param name="id" value="6"/>
+            <ui:param name="action" value="#{timer}"/>
+        </ui:include>
+    </c:if>
+    <c:if test="#{timer.now() != null}">
+        <ui:include src="_ajax1.xhtml">
+            <ui:param name="id" value="7"/>
+            <ui:param name="action" value="#{timer}"/>
+        </ui:include>
+    </c:if>
+</h:body>
+</html>
