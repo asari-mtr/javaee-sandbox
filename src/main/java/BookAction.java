@@ -36,7 +36,6 @@ public class BookAction implements Serializable {
     private String type;
 
     public String getType() {
-        System.out.println("get type = " + type);
         return type;
     }
 

@@ -20,10 +20,6 @@ public class SimpleRepository<E extends AbstractEntity> extends AbstractReposito
 
     public SimpleRepository() {
         // TODO きれいにしたい
-        System.out.println(this.getClass().getName());
-        System.out.println(this.getClass().getGenericSuperclass().getTypeName());
-        System.out.println(this.getClass().getSuperclass().getName());
-        System.out.println(this.getClass().getSuperclass().getGenericSuperclass().getTypeName());
         if(this.getClass().getGenericSuperclass().getTypeName().contains("SmartRepository")){
             Type type = this.getClass().getGenericSuperclass();
             clazz = (Class<E>) ((ParameterizedType) type).getActualTypeArguments()[0];
