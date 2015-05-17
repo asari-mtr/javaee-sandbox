@@ -11,30 +11,57 @@
     <f:metadata>
         <f:viewParam name="type" value="#{bookAction.type}"/>
     </f:metadata>
+    <script type="text/javascript">
+        function ajaxMonitoring(data) {
+            document.getElementById("statusId").innerHTML += data.status + "| ";
+            if (data.status === "httpError" || data.status === "malformedXML" || data.status === "httpError" || data.status === "emptyResponse") {
+                document.getElementById("descriptionId").innerHTML += data.description;
+                document.getElementById("errorNameId").innerHTML += data.errorName;
+                document.getElementById("errorMessageId").innerHTML += data.errorMessage;
+            }
+            document.getElementById("responseCodeId").innerHTML += status.responseCode + "| ";
+            if(data.status === "complete") {
+                document.getElementById("typeId").innerHTML += data.type;
+                document.getElementById("sourceId").innerHTML += data.source + "<br/><xmp>" + new XMLSerializer().serializeToString(data.source) + "</xmp>";
+                document.getElementById("responseXMLId").innerHTML += data.responseXML + "<br/><xmp>" + new XMLSerializer().serializeToString(data.responseXML); + "</xmp>";
+                document.getElementById("responseTextId").innerHTML += "<xmp>" + data.responseText + "</xmp>";
+            }
+        }
+    </script>
 </h:head>
 <h:body>
     <ui:debug hotkey="k"/>
+    AJAX STATUS: <span id="statusId"/><br/>
+    AJAX TYPE: <span id="typeId"/><br/>
+    AJAX RESPONSE CODE: <span id="responseCodeId"/><br/>
+    AJAX SOURCE: <span id="sourceId"/><br/>
+    AJAX RESPONSE XML: <span id="responseXMLId"/><br/>
+    AJAX RESPONSE TEXT: <span id="responseTextId"/><br/>
+    <hr/>
+    ERROR DESCRIPTION: <span id="descriptionId"/><br/>
+    ERROR NAME: <span id="errorNameId"/><br/>
+    ERROR MESSAGE: <span id="errorMessageId"/><br/>
     <h:form>
         <h:commandButton value="click me 1!">
-            <f:ajax render="label1"/>
+            <f:ajax render="label1" onevent="ajaxMonitoring" onerror="ajaxMonitoring"/>
         </h:commandButton>
         <h:commandButton value="click me 2!">
-            <f:ajax render="label2"/>
+            <f:ajax render="label2" onevent="ajaxMonitoring" onerror="ajaxMonitoring"/>
         </h:commandButton>
         <h:commandButton value="click me 3!">
-            <f:ajax render="label3"/>
+            <f:ajax render="label3" onevent="ajaxMonitoring" onerror="ajaxMonitoring"/>
         </h:commandButton>
         <h:commandButton value="click me 4!">
-            <f:ajax render="label4"/>
+            <f:ajax render="label4" onevent="ajaxMonitoring" onerror="ajaxMonitoring"/>
         </h:commandButton>
         <h:commandButton value="click me 5!">
-            <f:ajax render="label5"/>
+            <f:ajax render="label5" onevent="ajaxMonitoring" onerror="ajaxMonitoring"/>
         </h:commandButton>
         <h:commandButton value="click me 6!">
-            <f:ajax render="label6"/>
+            <f:ajax render="label6" onevent="ajaxMonitoring" onerror="ajaxMonitoring"/>
         </h:commandButton>
         <h:commandButton value="click me 7!">
-            <f:ajax render="label7"/>
+            <f:ajax render="label7" onevent="ajaxMonitoring" onerror="ajaxMonitoring"/>
         </h:commandButton>
     </h:form>
     <br/>
