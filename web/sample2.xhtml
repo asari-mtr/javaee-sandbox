@@ -9,5 +9,12 @@
         >
 <h:head></h:head>
 <h:body>
+    <f:metadata>
+        <f:viewParam name="id" value="#{sample1Action.id}"/>
+        <f:viewParam name="parent_id" value="#{sample2Action.id}"/>
+    </f:metadata>
+
+    sample1 : #{sample1Action.id}<br/>
+    sample2 : #{sample2Action.id}<br/>
 </h:body>
 </html>
