@@ -16,5 +16,16 @@
 
     sample1 : #{sample1Action.id}<br/>
     sample2 : #{sample2Action.id}<br/>
+    <h:form>
+    <ui:include src="_commandLink.xhtml">
+        <ui:param name="id" value="1"/>
+        <ui:param name="action" value="#{sample1Action}"/>
+    </ui:include>
+    <br/>
+    <ui:include src="_commandLink.xhtml">
+        <ui:param name="id" value="2"/>
+        <ui:param name="action" value="#{sample2Action.deleteAction}"/>
+    </ui:include>
+    </h:form>
 </h:body>
 </html>

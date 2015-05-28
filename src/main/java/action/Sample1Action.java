@@ -20,4 +20,7 @@ public class Sample1Action {
         System.out.println(this + "sample1Action.setId " + id);
         this.id = id;
     }
+    public String delete () {
+        return "view1.xhtml";
+    }
 }
