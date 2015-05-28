@@ -25,9 +25,11 @@ public class Sample2Action {
         this.id = id;
     }
 
+    public String deleteSample2() {
+        return "view2.xhtml";
+    }
+
     public DeleteAction getDeleteAction () {
-        return () -> {
-            return "view2.xhtml";
-        };
+        return this::deleteSample2;
     }
 }
