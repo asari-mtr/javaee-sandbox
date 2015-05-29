@@ -58,5 +58,7 @@ public class Startup {
         alice.setName("アリス");
         alice.setBook(savedDictionary);
         personalRepository.save(alice);
+
+        personalRepository.findMany("").forEach(System.out::println);
     }
 }

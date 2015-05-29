@@ -18,6 +18,10 @@ public class SimpleRepository<E extends AbstractEntity> extends AbstractReposito
     @PersistenceContext(name = "NewPersistenceUnit")
     private EntityManager entityManager;
 
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
     public SimpleRepository() {
         // TODO きれいにしたい
         if(this.getClass().getGenericSuperclass().getTypeName().contains("SmartRepository")){

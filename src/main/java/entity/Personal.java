@@ -31,4 +31,9 @@ public class Personal extends AbstractEntity {
     public void setBook(Book book) {
         this.book = book;
     }
+
+    @Override
+    public String toString() {
+        return getId() + ":" + name + ":" + book;
+    }
 }

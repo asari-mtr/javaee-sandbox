@@ -37,4 +37,9 @@ public class Book extends AbstractEntity{
 //    public void setPublishDate(Date publishDate) {
 //        this.publishDate = publishDate;
 //    }
+
+    @Override
+    public String toString() {
+        return getId() + ":" + title;
+    }
 }
