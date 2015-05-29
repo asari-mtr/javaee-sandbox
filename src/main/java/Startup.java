@@ -59,6 +59,6 @@ public class Startup {
         alice.setBook(savedDictionary);
         personalRepository.save(alice);
 
-        personalRepository.findMany("").forEach(System.out::println);
+        personalRepository.findMany("ワンピース").forEach(System.out::println);
     }
 }
