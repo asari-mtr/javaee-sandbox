@@ -1,15 +1,12 @@
 import entity.Comic;
 import entity.Dictionary;
 import entity.Magazine;
-import repository.ComicRepository;
-import repository.DictionaryRepository;
-import repository.MagazineRepository;
-import repository.SmartRepository;
+import entity.Personal;
+import repository.*;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  * Created by asari on 2015/05/04.
@@ -25,6 +22,8 @@ public class Startup {
     private DictionaryRepository dictionaryRepository;
     @Inject
     private MagazineRepository magazineRepository;
+    @Inject
+    private PersonalRepository personalRepository;
 
     @PostConstruct
     public void startup() {
@@ -38,16 +37,26 @@ public class Startup {
         Comic comic = new Comic();
         comic.setTitle("ワンピース");
         comic.setAuthor("おだ");
-        comicRepository.save(comic);
+        Comic savedComic = comicRepository.save(comic);
 
         Dictionary dictionary = new Dictionary();
         dictionary.setTitle("広辞苑");
         dictionary.setAuthor("岩波書店");
-        dictionaryRepository.save(dictionary);
+        Dictionary savedDictionary = dictionaryRepository.save(dictionary);
 
         Magazine magazine = new Magazine();
         magazine.setTitle("週刊アスキー");
         magazine.setAuthor("アスキー");
         magazineRepository.save(magazine);
+
+        Personal bob = new Personal();
+        bob.setName("ボブ");
+        bob.setBook(savedComic);
+        personalRepository.save(bob);
+
+        Personal alice = new Personal();
+        alice.setName("アリス");
+        alice.setBook(savedDictionary);
+        personalRepository.save(alice);
     }
 }
