@@ -25,11 +25,22 @@ public class Sample2Action {
         this.id = id;
     }
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String deleteSample2() {
+        System.out.println("Delete " + name);
         return "view2.xhtml";
     }
 
-    public DeleteAction getDeleteAction () {
+    public DeleteAction getDeleteAction() {
         return this::deleteSample2;
     }
 }
