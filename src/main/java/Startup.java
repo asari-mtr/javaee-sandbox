@@ -60,5 +60,6 @@ public class Startup {
         personalRepository.save(alice);
 
         personalRepository.findMany("ワンピース").forEach(System.out::println);
+        personalRepository.findComic().forEach(System.out::println);
     }
 }

@@ -32,4 +32,22 @@ public class PersonalRepository extends SmartRepository<Personal> {
         query.where(builder.equal(book.get(Book_.title), keyword));
         return query.orderBy(builder.asc(root.get(Personal_.name)));
     }
+
+    public Collection<Personal> findComic() {
+        EntityManager entityManager = getEntityManager();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Personal> query = builder.createQuery(Personal.class);
+        Root<Personal> root = query.from(Personal.class);
+
+        CriteriaQuery<Personal> findQuery = generateQueryByComic(builder, query, root);
+        TypedQuery<Personal> typedQuery = getEntityManager().createQuery(findQuery
+        );
+        return typedQuery.getResultList();
+    }
+
+    private CriteriaQuery<Personal> generateQueryByComic(CriteriaBuilder builder, CriteriaQuery<Personal> query, Root<Personal> root) {
+        Join<Personal, Book> book = root.join(Personal_.book);
+        query.where(builder.treat(book, Dictionary.class).isNotNull());
+        return query.orderBy(builder.asc(root.get(Personal_.name)));
+    }
 }
