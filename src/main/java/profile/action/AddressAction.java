@@ -2,6 +2,7 @@ package profile.action;
 
 import profile.model.Address;
 import profile.model.Profile;
+import profile.model.ProfileHolder;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -15,14 +16,11 @@ import javax.inject.Named;
 @ConversationScoped
 public class AddressAction implements SingleAction<Address> {
     @Inject
-    private Profile profile;
-
-    @Inject
-    private Conversation conversation;
+    private ProfileHolder profileHolder;
 
     @Override
     public Address getSelected() {
-        Address address = profile.getAddress();
+        Address address = profileHolder.getProfile().getAddress();
         if(address != null && address.getId() != null && !address.isFetched()) {
             address.setStreet("street #" + address.getId());
             address.setFetched(true);

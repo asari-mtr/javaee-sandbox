@@ -3,6 +3,7 @@ package profile.action;
 import profile.model.Address;
 import profile.model.Job;
 import profile.model.Profile;
+import profile.model.ProfileHolder;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
@@ -20,21 +21,11 @@ import java.io.Serializable;
 public class ProfileAction implements SingleAction {
     private Long id;
     private int count;
-    @Inject
-    private JobAction jobAction;
-
-    public JobAction getJobAction() {
-        return jobAction;
-    }
-
-    public void setJobAction(JobAction jobAction) {
-        this.jobAction = jobAction;
-    }
 
     @Inject
     private Conversation conversation;
     @Inject
-    private Profile profile;
+    private ProfileHolder profileHolder;
     public void beginConversation () {
         if(conversation.isTransient()) {
             conversation.begin();
@@ -49,13 +40,8 @@ public class ProfileAction implements SingleAction {
         }
     }
     public Profile getSelected() {
-        if(id == null) {
-            // 初期化
-            profile = new Profile();
-            profile.setAddress(new Address());
-            profile.setJob(new Job());
-        } else {
-            if(profile.getId() == null || profile.getId() != id || !profile.isFetched()){
+        Profile profile = profileHolder.getProfile();
+        if (profile.getId() == null || profile.getId() != id || !profile.isFetched()) {
 
             // 本当はロードされるイメージ
             profile.setId(id);
@@ -66,11 +52,11 @@ public class ProfileAction implements SingleAction {
             Job job = new Job();
             job.setId(id * 17);
             profile.setJob(job);
-                profile.setFetched(true);
-                System.out.println("Profile fetched!");
-            }
+            profile.setFetched(true);
+            System.out.println("Profile fetched!");
         }
-        return profile;
+        profileHolder.setProfile(profile);
+        return profileHolder.getProfile();
     }
     public String getCid() {
         return conversation.getId();
@@ -84,11 +70,11 @@ public class ProfileAction implements SingleAction {
     }
 
     public Profile getProfile() {
-        return profile;
+        return profileHolder.getProfile();
     }
 
     public void setProfile(Profile profile) {
-        this.profile = profile;
+        profileHolder.setProfile(profile);
     }
 
     public void countUp() {

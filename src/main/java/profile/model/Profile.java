@@ -2,14 +2,17 @@ package profile.model;
 
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 
 /**
  * Created by asari on 2015/06/13.
  */
-@ConversationScoped
+@Dependent
 public class Profile extends ViewModel {
     private String name;
+    @Inject
     private Address address;
+    @Inject
     private Job job;
 
     public String getName() {
