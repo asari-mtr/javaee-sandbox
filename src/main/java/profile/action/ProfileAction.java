@@ -61,12 +61,4 @@ public class ProfileAction implements SingleAction {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Profile getProfile() {
-        return profileHolder.getProfile();
-    }
-
-    public void setProfile(Profile profile) {
-        profileHolder.setProfile(profile);
-    }
 }
