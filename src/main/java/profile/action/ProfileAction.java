@@ -20,7 +20,6 @@ import java.io.Serializable;
 @ConversationScoped
 public class ProfileAction implements SingleAction {
     private Long id;
-    private int count;
 
     @Inject
     private Conversation conversation;
@@ -75,12 +74,5 @@ public class ProfileAction implements SingleAction {
 
     public void setProfile(Profile profile) {
         profileHolder.setProfile(profile);
-    }
-
-    public void countUp() {
-        count ++;
-    }
-    public int getCount() {
-        return count;
     }
 }
