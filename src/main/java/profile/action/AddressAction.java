@@ -3,6 +3,7 @@ package profile.action;
 import profile.model.Address;
 import profile.model.Profile;
 import profile.model.ProfileHolder;
+import profile.service.ProfileService;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -17,15 +18,18 @@ import javax.inject.Named;
 public class AddressAction implements SingleAction<Address> {
     @Inject
     private ProfileHolder profileHolder;
+    @Inject
+    private ProfileService service;
 
     @Override
     public Address getSelected() {
         Address address = profileHolder.getProfile().getAddress();
         if(address != null && address.getId() != null && !address.isFetched()) {
-            address.setStreet("street #" + address.getId());
-            address.setFetched(true);
+            Address newAddress = service.findAddress(profileHolder.getProfile().getId(), address.getId());
+            newAddress.setFetched(true);
+            profileHolder.getProfile().setAddress(newAddress);
             System.out.println("Address fetched!");
         }
-        return address;
+        return profileHolder.getProfile().getAddress();
     }
 }

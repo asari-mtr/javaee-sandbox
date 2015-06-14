@@ -4,6 +4,7 @@ import profile.model.Address;
 import profile.model.Job;
 import profile.model.Profile;
 import profile.model.ProfileHolder;
+import profile.service.ProfileService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
@@ -20,6 +21,8 @@ import java.io.Serializable;
 @ConversationScoped
 public class ProfileAction implements SingleAction {
     private Long id;
+    @Inject
+    private ProfileService service;
 
     @Inject
     private Conversation conversation;
@@ -41,16 +44,7 @@ public class ProfileAction implements SingleAction {
     public Profile getSelected() {
         Profile profile = profileHolder.getProfile();
         if (profile.getId() == null || profile.getId() != id || !profile.isFetched()) {
-
-            // 本当はロードされるイメージ
-            profile.setId(id);
-            profile.setName("name #" + id);
-            Address address = new Address();
-            address.setId(id * 13);
-            profile.setAddress(address);
-            Job job = new Job();
-            job.setId(id * 17);
-            profile.setJob(job);
+            profile = service.find(id);
             profile.setFetched(true);
             System.out.println("Profile fetched!");
         }

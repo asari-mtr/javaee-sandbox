@@ -3,6 +3,7 @@ package profile.action;
 import profile.model.Job;
 import profile.model.Profile;
 import profile.model.ProfileHolder;
+import profile.service.ProfileService;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -18,15 +19,18 @@ import javax.inject.Named;
 public class JobAction implements SingleAction<Job> {
     @Inject
     private ProfileHolder profileHolder;
+    @Inject
+    private ProfileService service;
 
     @Override
     public Job getSelected() {
         Job job = profileHolder.getProfile().getJob();
         if(job != null && job.getId() != null && !job.isFetched()) {
-            job.setPosition("position #" + job.getId());
-            job.setFetched(true);
+            Job newJob = service.findJob(profileHolder.getProfile().getId(), job.getId());
+            newJob.setFetched(true);
+            profileHolder.getProfile().setJob(newJob);
             System.out.println("Job fetched!");
         }
-        return job;
+        return profileHolder.getProfile().getJob();
     }
 }
