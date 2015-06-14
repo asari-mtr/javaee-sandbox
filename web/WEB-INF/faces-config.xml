@@ -12,4 +12,19 @@
           </redirect>
       </navigation-case>
   </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/profile/*</from-view-id>
+        <navigation-case>
+            <from-outcome>address</from-outcome>
+            <to-view-id>/profile/address.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>/profile/profile.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>job</from-outcome>
+            <to-view-id>/profile/job.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
