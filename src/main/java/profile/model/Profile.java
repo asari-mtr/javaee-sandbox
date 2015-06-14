@@ -6,7 +6,7 @@ import javax.enterprise.context.Dependent;
 /**
  * Created by asari on 2015/06/13.
  */
-@Dependent
+@ConversationScoped
 public class Profile extends ViewModel {
     private String name;
     private Address address;

@@ -13,7 +13,7 @@ import javax.inject.Named;
  * Created by asari on 2015/06/13.
  */
 @Named
-@Dependent
+@ConversationScoped
 public class JobAction implements SingleAction<Job> {
     @Inject
     private Profile profile;

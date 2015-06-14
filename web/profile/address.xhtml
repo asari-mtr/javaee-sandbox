@@ -13,7 +13,6 @@
     <f:metadata>
         <f:viewParam name="id" value="#{profileAction.id}" converter="javax.faces.Long"/>
         <f:event type="preRenderView" listener="#{profileAction.beginConversation}"/>
-        <f:event type="preRenderView" listener="#{addressAction.beginConversation}"/>
     </f:metadata>
     id: #{profileAction.profile.id}<br/>
     name: #{profileAction.selected.name}<br/>
