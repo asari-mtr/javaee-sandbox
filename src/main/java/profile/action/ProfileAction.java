@@ -48,6 +48,7 @@ public class ProfileAction implements SingleAction {
         }
         if (profile.getId() == null || profile.getId() != id || !profile.isFetched()) {
             profile = service.find(id);
+            profile.setId(id);
             profile.setFetched(true);
             System.out.println("Profile fetched!");
         }
