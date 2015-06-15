@@ -38,8 +38,8 @@
     <span>
         <h:link outcome="job" value="job">
             <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
-            <f:param name="id" value="#{profileAction.profile.id}"/>
-            <f:param name="job_id" value="#{profileAction.profile.job.id}"/>
+            <f:param name="id" value="#{profileAction.selected.id}"/>
+            <f:param name="job_id" value="#{profileAction.selected.job.id}"/>
         </h:link>
     </span>
     </h:form>

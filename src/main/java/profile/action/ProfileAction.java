@@ -43,6 +43,9 @@ public class ProfileAction implements SingleAction {
     }
     public Profile getSelected() {
         Profile profile = profileHolder.getProfile();
+        if (id == null) {
+            id = Long.valueOf((int)(Math.random() * 1000));
+        }
         if (profile.getId() == null || profile.getId() != id || !profile.isFetched()) {
             profile = service.find(id);
             profile.setFetched(true);
